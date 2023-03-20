@@ -22,8 +22,8 @@ jobs:
       uses: peter-evans/repository-dispatch@v2
       with:
         token: ${{ secrets.WORKFLOW_TOKEN }}
-        repository: tarathep/app-poc-receive-config
-        event-type: receive-secret
+        repository: tarathep/app-poc-action-config
+        event-type: app-config
   
 
   get-secret:
