@@ -10,11 +10,11 @@ on:
 
 jobs:
   dispatch-config:
-    if: ${{vars.GITHUB_EVENT_NAME == 'workflow_dispatch' }} 
+    # if: ${{ vars.GITHUB_EVENT_NAME == 'workflow_dispatch' }} 
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo hello
+          echo ${{vars.GITHUB_EVENT_NAME}}
 
     # permissions:
     #   actions: read
