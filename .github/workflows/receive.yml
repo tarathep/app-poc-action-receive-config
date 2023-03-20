@@ -12,37 +12,28 @@ jobs:
   dispatch-config:
     if: ${{ github.event_name == 'workflow_dispatch' }} 
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+      security-events: write
+      packages: read
     steps:
-      - run: |
-          echo xx
-
-    # permissions:
-    #   actions: read
-    #   contents: write
-    #   security-events: write
-    #   packages: read
-    # steps:
-    # - name: Repository Dispatch
-    #   uses: peter-evans/repository-dispatch@v2
-    #   with:
-    #     token: ${{ secrets.WORKFLOW_TOKEN }}
-    #     repository: tarathep/app-poc-receive-config
-    #     event-type: receive-secret
-    #     client-payload: '{"repository": "${{ github.repository }}" , "ref": "${{ github.ref }}", "test_secret": "${{ secrets.TEST_SECRET }}", "github_token": "${{ secrets.WORKFLOW_TOKEN }}"}'
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.WORKFLOW_TOKEN }}
+        repository: tarathep/app-poc-receive-config
+        event-type: receive-secret
   
-  
-  # get-secret:
-  #   # The type of runner that the job will run on
-  #   runs-on: ubuntu-latest
 
-  #   # Steps represent a sequence of tasks that will be executed as part of the job
-  #   steps:
-  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  #     - uses: actions/checkout@v3
+  get-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       
-  #     - name: Test remote repo with remote personal token secret
-  #       run: |
-  #         echo "Some secret here. ${{ github.event.client_payload.test_secret }}" > myfile.txt
-  #         cat myfile.txt
+      - name: Test remote repo with remote personal token secret
+        run: |
+          echo "Some secret here. ${{ github.event.client_payload.test_secret }}" > myfile.txt
+          cat myfile.txt
          
      
