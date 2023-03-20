@@ -10,7 +10,7 @@ on:
 
 jobs:
   dispatch-config:
-    if: github.event.name == 'workflow_dispatch'
+    if: ${{vars.GITHUB_EVENT_NAME == 'workflow_dispatch' }} 
     runs-on: ubuntu-latest
     steps:
       - run: |
