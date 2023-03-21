@@ -6,7 +6,7 @@ name: Receive
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [receive-secret]
+    types: [Receive Step 2]
 
 jobs:
   dispatch-config:
@@ -23,7 +23,7 @@ jobs:
       with:
         token: ${{ secrets.WORKFLOW_TOKEN }}
         repository: tarathep/app-poc-action-config
-        event-type: app-config
+        event-type: Get Config
   
 
   get-secret:
